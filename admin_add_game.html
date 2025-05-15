@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إضافة لعبة جديدة - لوحة التحكم</title>
+    <link rel="stylesheet" href="style.css"> <!-- تأكد أن الـ CSS يدعم النموذج الجديد -->
+</head>
+<body>
+    <header>
+        <h1>لوحة تحكم الإدارة - إضافة لعبة</h1>
+        <nav>
+            <a href="dashboard.html">لوحة التحكم</a> |
+            <a href="home.html">العودة للرئيسية</a>
+        </nav>
+    </header>
+
+    <main>
+        <section id="add-game-admin">
+            <h2>إضافة لعبة جديدة</h2>
+            <form id="game-form">
+                <label for="game-title">اسم اللعبة:</label>
+                <input type="text" id="game-title" required>
+
+                <label for="game-type">نوع اللعبة:</label>
+                <input type="text" id="game-type" required>
+
+                <label for="game-rating">التقييم (من 1 إلى 5):</label>
+                <input type="number" id="game-rating" min="1" max="5" required>
+
+                <label for="game-image">رابط صورة اللعبة:</label>
+                <input type="text" id="game-image" required>
+
+                <button type="submit">إضافة</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Falcon - لوحة تحكم المسؤول</p>
+    </footer>
+
+    <script src="games_script.js"></script>
+
+</body>
+</html>

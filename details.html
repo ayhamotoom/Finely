@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>تفاصيل اللعبة</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .star {
+            font-size: 30px;
+            cursor: pointer;
+            color: gray;
+        }
+        .star.active {
+            color: gold;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1><a href="games.html">Falcon</a></h1>
+    </header>
+
+    <section id="game-details"></section>
+
+    <footer>
+        <p>&copy; 2025 Falcon. جميع الحقوق محفوظة.</p>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const details = document.getElementById("game-details");
+            const games = JSON.parse(localStorage.getItem("games")) || [];
+            const index = localStorage.getItem("selectedGame");
+            const game = games[index];
+
+            if (!game) {
+                details.innerHTML = "<p>لم يتم العثور على اللعبة.</p>";
+                return;
+            }
+
+            details.innerHTML = `
+                <img src="${game.image}" alt="${game.title}" width="200">
+                <h2>${game.title}</h2>
+                <p><strong>النوع:</strong> ${game.type}</p>
+                <p><strong>الوصف:</strong> ${game.description}</p>
+                <div id="rating-stars">
+                    <p>قيّم اللعبة:</p>
+                    ${[1,2,3,4,5].map(i => `<span class="star" data-rate="${i}">★</span>`).join('')}
+                </div>
+            `;
+
+            const stars = document.querySelectorAll(".star");
+            let userRating = localStorage.getItem("rating_" + index) || 0;
+            updateStars(userRating);
+
+            stars.forEach(star => {
+                star.addEventListener("click", () => {
+                    userRating = star.getAttribute("data-rate");
+                    localStorage.setItem("rating_" + index, userRating);
+                    updateStars(userRating);
+                });
+            });
+
+            function updateStars(rating) {
+                stars.forEach(star => {
+                    const rate = star.getAttribute("data-rate");
+                    star.classList.toggle("active", rate <= rating);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
